@@ -2,7 +2,9 @@ package models;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import sun.security.pkcs11.wrapper.PKCS11Constants;
 
+import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,6 +34,17 @@ public class SystemUser {
 
     @DatabaseField(columnName = USER_MONEY)
     private int money;
+
+    public SystemUser() {
+
+    }
+
+    public SystemUser(String email, String name, String password, int money) {
+        this.email = email;
+        this.name = name;
+        this.password = password;
+        this.money = money;
+    }
 
     public String toMessage() {
         return email + ";" + name + ";" + money + ";" + userID;

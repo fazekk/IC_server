@@ -29,6 +29,10 @@ dependencies {
     compile("org.springframework.boot:spring-boot-starter-web") {
         exclude module: "spring-boot-starter-tomcat"
     }
+    compile 'com.j256.ormlite:ormlite-core:4.35'
+    compile 'com.j256.ormlite:ormlite-jdbc:4.35'
+    compile 'mysql:mysql-connector-java:5.1.38'
+    compile project (':sharedModels')
     compile("org.springframework.boot:spring-boot-starter-jetty")
     // end::jetty[]
     // tag::actuator[]
