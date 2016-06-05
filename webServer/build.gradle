@@ -37,6 +37,8 @@ dependencies {
     // end::jetty[]
     // tag::actuator[]
     compile("org.springframework.boot:spring-boot-starter-actuator")
+    compile 'com.jayway.jsonpath:json-path:2.0.0'
+    compile 'com.googlecode.json-simple:json-simple:1.1.1'
     // end::actuator[]
     testCompile("junit:junit")
 }

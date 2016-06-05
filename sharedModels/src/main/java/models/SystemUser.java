@@ -2,11 +2,6 @@ package models;
 
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
-import sun.security.pkcs11.wrapper.PKCS11Constants;
-
-import java.security.MessageDigest;
-import java.util.ArrayList;
-import java.util.List;
 
 /**
  * Created by zipfs on 2015. 12. 19..

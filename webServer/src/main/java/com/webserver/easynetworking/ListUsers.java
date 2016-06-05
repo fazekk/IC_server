@@ -20,8 +20,8 @@ public class ListUsers {
     @Value("${database.url}")
     private String databaseURL;
 
-    @RequestMapping(value="/listUsers")
-    @ModelAttribute("users")
+    @RequestMapping(value="/listUsers", method = RequestMethod.GET)
+    @ResponseBody
     public List<SystemUser> listUsers(){
         try {
             ConnectionSource connectionSource = new JdbcConnectionSource(databaseURL);
