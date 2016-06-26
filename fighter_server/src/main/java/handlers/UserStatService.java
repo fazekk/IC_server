@@ -22,8 +22,11 @@ public class UserStatService extends MessageReciver {
     }
 
     @Override
-    public void onRecive(String[] message) {
+    public void onRecive(String message) {
         super.onRecive(message);
+
+
+
         Client user = Session.getUserWithSession(message[1]);
         try {
             if(Integer.parseInt(message[2]) == DefaultMessages.USER_STAT_USER) {

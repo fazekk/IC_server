@@ -1,4 +1,4 @@
-package handlers.game;
+package game;
 
 /**
  * Created by zipfs on 2016. 01. 16..

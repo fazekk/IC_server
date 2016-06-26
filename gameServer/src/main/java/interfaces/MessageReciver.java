@@ -18,11 +18,11 @@ public class MessageReciver {
         this.connectionSource = connectionSource;
     }
 
-    public void onRecive(String[] message){
+    public void onRecive(String message){
 
     }
 
-    public void send(String message) throws IOException {
+    public void send(String message, int socketType) throws IOException {
         thread.send(message);
     }
 }

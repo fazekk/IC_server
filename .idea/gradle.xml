@@ -10,6 +10,7 @@
         <option name="modules">
           <set>
             <option value="$PROJECT_DIR$" />
+            <option value="$PROJECT_DIR$/fighter_server" />
             <option value="$PROJECT_DIR$/gameServer" />
             <option value="$PROJECT_DIR$/sharedModels" />
             <option value="$PROJECT_DIR$/webServer" />

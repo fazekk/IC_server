@@ -1,9 +1,11 @@
 package models;
 
+import com.google.gson.Gson;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import sun.security.pkcs11.wrapper.PKCS11Constants;
 
+import java.net.DatagramSocket;
 import java.security.MessageDigest;
 import java.util.ArrayList;
 import java.util.List;
@@ -47,7 +49,7 @@ public class SystemUser {
     }
 
     public String toMessage() {
-        return email + ";" + name + ";" + money + ";" + userID;
+        return new Gson().toJson(this);
     }
 
     public int getUserID() {
@@ -88,5 +90,10 @@ public class SystemUser {
 
     public void setMoney(int money) {
         this.money = money;
+    }
+
+
+    public static SystemUser fromJson(String data) {
+        return new Gson().fromJson(data,SystemUser.class);
     }
 }

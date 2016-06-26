@@ -1,11 +1,12 @@
-package handlers.menu;
+package handlers;
 
 import com.j256.ormlite.support.ConnectionSource;
 import constants.DefaultMessages;
 import constants.Properties;
-import handlers.game.GameHandler;
-import interfaces.MessageReciver;
+import game.GameHandler;
+import interfaces.MessageHandler;
 import helpers.Games;
+import models.request.Request;
 import server.ServerVariables;
 import helpers.Session;
 import logger.Log;
@@ -19,7 +20,7 @@ import java.util.List;
 /**
  * Created by zipfs on 2015. 12. 20..
  */
-public class SearchForGameHandler extends MessageReciver {
+public class SearchForGameHandler extends MessageHandler {
 
     private ConnectionSource connectionSource;
 
@@ -32,8 +33,10 @@ public class SearchForGameHandler extends MessageReciver {
     //Message: 7; session; gameType
 
     @Override
-    public void onRecive(String[] message) {
+    public void onRecive(Request message) {
         super.onRecive(message);
+
+        SearchForGameRequest searchForGameRequest = SearchForGameRequest.fromJson(message);
 
         Client user = Session.getUserWithSession(message[1]);
         if(Integer.parseInt(message[2]) == DefaultMessages.SEARCH_CANCEL){

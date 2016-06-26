@@ -3,12 +3,15 @@ package handlers.menu;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
+import constants.Constants;
 import constants.DefaultMessages;
-import interfaces.MessageReciver;
+import interfaces.MessageHandler;
 import helpers.MD5Hash;
 import helpers.Session;
 import logger.Log;
 import models.Client;
+import models.request.LoginRequest;
+import models.request.Request;
 import models.SystemUser;
 import thread.ClientThread;
 
@@ -18,46 +21,39 @@ import java.util.List;
 /**
  * Created by zipfs on 2015. 12. 19..
  */
-public class LoginHandler extends MessageReciver {
+public class LoginHandler extends MessageHandler {
 
     private ConnectionSource connectionSource;
-    private ClientThread clientThread;
 
-    public LoginHandler(ConnectionSource connectionSource, ClientThread thread) {
-        super(connectionSource, thread);
+    public LoginHandler(ConnectionSource connectionSource) {
+        super(connectionSource);
         this.connectionSource = connectionSource;
-        this.clientThread = thread;
     }
 
-
-    @Override
-    public void onRecive(String[] message) {
+    public void onRecive(String message, ClientThread thread) {
         try {
             // instantiate the dao
-            Dao<Client, String> userDao =
-                    DaoManager.createDao(connectionSource, Client.class);
+            LoginRequest request = LoginRequest.fromJson(message);
 
-            // if you need to create the 'accounts' table make this call
-            //TableUtils.createTable(connectionSource, Client.class);
-            List<Client> users = userDao.queryBuilder().where().eq(SystemUser.USER_NAME, message[1])
-                    .and().eq(SystemUser.USER_PASSWORD, MD5Hash.getMD5(message[2])).query();
+            Dao<SystemUser, String> userDao =
+                    DaoManager.createDao(connectionSource, SystemUser.class);
+
+            List<SystemUser> users = userDao.queryBuilder().where().eq(SystemUser.USER_NAME, request.getUserName())
+                    .and().eq(SystemUser.USER_PASSWORD, MD5Hash.getMD5(request.getPassword())).query();
             if (users.size()>0){
-                Client user = users.get(0);
-                user.setClientThread(clientThread);
+                Client user = new Client(users.get(0));
+                user.setClientThread(thread);
                 if (user != null) {
                     String session = Session.addUser(user);
-                    send(DefaultMessages.LOGIN + ";" + session);
+                    send(DefaultMessages.LOGIN + ";" + session, Constants.TCP, user);
                 }
             }else {
-                send(DefaultMessages.LOGIN + ";" + DefaultMessages.LOGIN_FAILED);
+                Client client = new Client();
+                client.setClientThread(thread);
+                send(DefaultMessages.LOGIN + ";" + DefaultMessages.LOGIN_FAILED, Constants.TCP, client);
             }
         }catch (Exception e){
             Log.write(e);
         }
-    }
-
-    @Override
-    public void send(String message) throws IOException {
-        super.send(message);
     }
 }
