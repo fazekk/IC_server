@@ -3,9 +3,8 @@ package handlers;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
-import constants.DefaultMessages;
-import interfaces.MessageReciver;
 import helpers.Session;
+import interfaces.RequestHandler;
 import logger.Log;
 import models.*;
 import models.Character;
@@ -17,13 +16,13 @@ import java.util.List;
 /**
  * Created by zipfs on 2015. 12. 29..
  */
-public class TeamSelectHandler extends MessageReciver {
+public class TeamSelectHandler extends RequestHandler {
 
     private List<UserHasTeam> userTeams;
     private Dao<UserHasTeam, String> userHasTeamDao;
     private Dao<Team, String> teamDao;
     private Dao<models.Character, String> characterDao;
-
+/*
     public TeamSelectHandler(ConnectionSource connectionSource, ClientThread thread) {
         super(connectionSource, thread);
         try {
@@ -73,5 +72,5 @@ public class TeamSelectHandler extends MessageReciver {
     @Override
     public void send(String message) throws IOException {
         super.send(message);
-    }
+    }*/
 }

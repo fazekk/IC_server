@@ -1,13 +1,13 @@
 package server;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.j256.ormlite.support.ConnectionSource;
 import constants.Constants;
-import constants.DefaultMessages;
-import handlers.menu.LoginHandler;
+import handlers.LoginRequest;
+import interfaces.RequestHandler;
 import interfaces.Reciver;
 import logger.Log;
 import models.Client;
-import models.request.Request;
 import thread.ClientThread;
 import thread.UDPServeThread;
 
@@ -17,31 +17,34 @@ import thread.UDPServeThread;
  */
 public class Router extends Reciver {
 
-    private ConnectionSource connectionSource;
-
     public Router(ConnectionSource connectionSource) {
         super(connectionSource);
-        this.connectionSource = connectionSource;
     }
 
     @Override
     public void onRecive(String message, ClientThread thread) {
+
+
         try {
-            Request request = Request.fromJson(message);
-            int type = request.getType();
+            RequestHandler requestHandler = new ObjectMapper().readValue(message, RequestHandler.class);
+            requestHandler.setConnectionSource(connectionSource);
+            requestHandler.setThread(thread);
+            requestHandler.onRecive(message);
+            /*
             if (type == DefaultMessages.LOGIN_UNAME_PASS) {
-                LoginHandler loginHandler = new LoginHandler(connectionSource);
+                LoginRequest loginHandler = new LoginRequest(connectionSource);
                 loginHandler.onRecive(message, thread);
             } else {
                 Client client = new Client();
                 client.setClientThread(thread);
                 send(DefaultMessages.BAD_REQUEST + "", Constants.TCP, client);
-            }
+            }*/
+
         }catch (Exception e){
             try {
                 Client client = new Client();
                 client.setClientThread(thread);
-                send(DefaultMessages.BAD_REQUEST + "", Constants.TCP, client);
+                send(Constants.BAD_REQUEST + "", Constants.TCP, client);
             }catch(Exception e1){
                 Log.write(e);
             }

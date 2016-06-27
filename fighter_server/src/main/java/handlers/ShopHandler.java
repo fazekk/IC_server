@@ -1,26 +1,16 @@
 package handlers;
 
 import com.j256.ormlite.dao.Dao;
-import com.j256.ormlite.dao.DaoManager;
-import com.j256.ormlite.support.ConnectionSource;
-import constants.DefaultMessages;
-import constants.Properties;
-import interfaces.MessageReciver;
+import interfaces.RequestHandler;
 import models.*;
 import models.Character;
-import server.ServerVariables;
-import helpers.Session;
-import logger.Log;
-import thread.ClientThread;
 
-import java.io.IOException;
-import java.sql.SQLException;
 import java.util.List;
 
 /**
  * Created by zipfs on 2015. 12. 29..
  */
-public class ShopHandler extends MessageReciver {
+public class ShopHandler extends RequestHandler {
 
     private List<Team> teams;
     private Dao<Team,String> teamDao;
@@ -28,23 +18,9 @@ public class ShopHandler extends MessageReciver {
     private Dao<Character, String> characterDao;
     private Dao<Client,String> userDao;
 
-
-    public ShopHandler(ConnectionSource connectionSource, ClientThread thread) {
-        super(connectionSource, thread);
-        try {
-            teamDao = DaoManager.createDao(connectionSource, Team.class);
-            userHasTeamsDao = DaoManager.createDao(connectionSource, UserHasTeam.class);
-            userDao = DaoManager.createDao(connectionSource, Client.class);
-            characterDao = DaoManager.createDao(connectionSource, Character.class);
-            teams = teamDao.queryForAll();
-        } catch (SQLException e) {
-            Log.write(e);
-        }
-    }
-
     @Override
-    public void onRecive(String[] message) {
-        super.onRecive(message);
+    public void onRecive(String message) {
+        /*super.onRecive(message);
         Client user = Session.getUserWithSession(message[1]);
         try {
             if(Integer.parseInt(message[2]) == DefaultMessages.SHOP_BUY_TEAM) {
@@ -90,11 +66,11 @@ public class ShopHandler extends MessageReciver {
             }
         } catch (Exception e) {
             Log.write(e);
-        }
+        }*/
     }
-
+    /*
     @Override
     public void send(String message) throws IOException {
-        super.send(message);
-    }
+        //super.send(message);
+    }*/
 }

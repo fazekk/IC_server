@@ -1,10 +1,13 @@
 package models;
 
-import com.google.gson.Gson;
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import sun.security.pkcs11.wrapper.PKCS11Constants;
 
+import java.io.IOException;
 import java.net.DatagramSocket;
 import java.security.MessageDigest;
 import java.util.ArrayList;
@@ -48,8 +51,8 @@ public class SystemUser {
         this.money = money;
     }
 
-    public String toMessage() {
-        return new Gson().toJson(this);
+    public String toMessage() throws JsonProcessingException {
+        return new ObjectMapper().writeValueAsString(this);
     }
 
     public int getUserID() {
@@ -93,7 +96,7 @@ public class SystemUser {
     }
 
 
-    public static SystemUser fromJson(String data) {
-        return new Gson().fromJson(data,SystemUser.class);
+    public static SystemUser fromJson(String data) throws IOException {
+        return new ObjectMapper().readValue(data, SystemUser.class);
     }
 }

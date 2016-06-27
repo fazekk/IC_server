@@ -1,41 +1,18 @@
 package handlers;
 
-import com.j256.ormlite.support.ConnectionSource;
-import constants.DefaultMessages;
-import constants.Properties;
-import game.GameHandler;
-import interfaces.MessageHandler;
-import helpers.Games;
-import models.request.Request;
-import server.ServerVariables;
-import helpers.Session;
-import logger.Log;
-import models.Client;
-import thread.ClientThread;
-
-import java.io.IOException;
-import java.util.ArrayList;
-import java.util.List;
+import interfaces.RequestHandler;
 
 /**
  * Created by zipfs on 2015. 12. 20..
  */
-public class SearchForGameHandler extends MessageHandler {
-
-    private ConnectionSource connectionSource;
-
-
-    public SearchForGameHandler(ConnectionSource connectionSource, ClientThread thread) {
-        super(connectionSource, thread);
-        this.connectionSource = connectionSource;
-    }
+public class SearchForGameHandler extends RequestHandler {
 
     //Message: 7; session; gameType
 
     @Override
-    public void onRecive(Request message) {
+    public void onRecive(String message) {
         super.onRecive(message);
-
+        /*
         SearchForGameRequest searchForGameRequest = SearchForGameRequest.fromJson(message);
 
         Client user = Session.getUserWithSession(message[1]);
@@ -79,14 +56,6 @@ public class SearchForGameHandler extends MessageHandler {
                     Log.write(e);
                 }
             }
-        }
+        }*/
     }
-
-
-    @Override
-    public void send(String message) throws IOException {
-        super.send(message);
-    }
-
-
 }

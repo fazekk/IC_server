@@ -3,7 +3,6 @@ package game;
 import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
-import constants.DefaultMessages;
 import helpers.Session;
 import logger.Log;
 import models.Map;
@@ -26,8 +25,9 @@ public class GameHandler{
     public GameHandler(ConnectionSource connectionSource, List<Client> users) {
         this.connectionSource = connectionSource;
         this.users = users;
+
         try {
-            Dao<Map, String> mapDao = DaoManager.createDao(connectionSource, Map.class);
+            /*Dao<Map, String> mapDao = DaoManager.createDao(connectionSource, Map.class);
             List<Map> maps = mapDao.queryBuilder().where().eq(Map.MAP_MAX_PLAYER, users.get(0).getSelectedGameType()).query();
             Random r = new Random();
 
@@ -39,14 +39,14 @@ public class GameHandler{
                 users.add(user);
 
                 send(DefaultMessages.SEARCH + ";" + DefaultMessages.GAME_FOUND + ";" + map.getMapName(), user);
-            }
+            }*/
         }catch (Exception e){
             Log.write(e);
         }
     }
 
     public void recive(String[] data) throws Exception {
-        updateClients();
+        /*updateClients();
         Client user = Session.getUserWithSession(data[1]);
         if(Integer.parseInt(data[2]) == DefaultMessages.READY_FOR_GAME){
             user.setStatus(Client.STATUS_REDY_FOR_GAME);
@@ -58,13 +58,13 @@ public class GameHandler{
             }
             SpawnHandler spawnHandler = new SpawnHandler(connectionSource, users, map);
             spawnHandler.sendSpawnPoints();
-        }
+        }*/
     }
 
     private void updateClients() {
         for(Client user : users){
             user.setClientThread(Session.getUserWithSession(user.getSession()).getClientThread());
-            user.getClientThread().getRouter().setGameHandler(this);
+            //user.getClientThread().getRouter().setGameHandler(this);
         }
     }
 

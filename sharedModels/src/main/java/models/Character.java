@@ -1,6 +1,5 @@
 package models;
 
-import com.google.gson.Gson;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 import jdk.nashorn.internal.ir.debug.JSONWriter;
@@ -108,10 +107,5 @@ public class Character {
 
     public void setSpirit(int spirit) {
         this.spirit = spirit;
-    }
-
-    public String toMessage() {
-        Gson gson = new Gson();
-        return gson.toJson(this);
     }
 }

@@ -15,14 +15,14 @@ import java.io.InputStreamReader;
 /**
  * Created by zipfs on 2015. 12. 19..
  */
-public class Main {
+public class ServerApplication {
     //url to noroc server!
     //database_string = "jdbc:mysql://127.0.0.1/strategy?user=NorocUser&password=asdasd";
 
     private static final String logName = "log.txt";
     private static final String confName = "conf.cfg";
 
-    public static void main(String[] args) {
+    public static void start() {
         init();
         mainThread();
     }

@@ -5,7 +5,6 @@ import helpers.Session;
 import logger.Log;
 import models.Client;
 import models.SystemUser;
-import models.request.Request;
 import server.Router;
 
 import java.io.*;
@@ -44,6 +43,7 @@ public class UDPServeThread extends Thread{
         super.run();
         while(run) {
             try {
+                /*
                 DatagramSocket socket = new DatagramSocket(udpPort);
                 byte[] data = new byte[bufferSize];
                 DatagramPacket packet = new DatagramPacket(data,0,bufferSize);
@@ -55,7 +55,7 @@ public class UDPServeThread extends Thread{
                 Client user = Session.getUserWithSession(request.getSession());
                 user.setUdpSocket(socket);
                 router.onRecive(message, this);
-                Thread.sleep(sleepTime);
+                Thread.sleep(sleepTime);*/
             }catch (Exception e) {
                 if(!e.getMessage().equals("socket closed")) {
                     Log.write(e);

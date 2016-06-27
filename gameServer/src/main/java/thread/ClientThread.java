@@ -1,8 +1,6 @@
 package thread;
 
 import com.j256.ormlite.support.ConnectionSource;
-import constants.Constants;
-import constants.DefaultMessages;
 import constants.Properties;
 import server.Router;
 import server.ServerVariables;
@@ -61,7 +59,7 @@ public class ClientThread extends Thread {
     private void timeOutIfNoResponse() {
         if(System.currentTimeMillis() > lastUpdateTime + 10000){
             lastUpdateTime = System.currentTimeMillis();
-            try {
+            /*try {
                 send(DefaultMessages.PING_REQUEST + ";");
             } catch (IOException e) {
                 Log.write(e.getMessage());
@@ -71,7 +69,7 @@ public class ClientThread extends Thread {
                 Log.write("Client time out!");
             }else{
                 timeOutCount++;
-            }
+            }*/
         }
     }
 

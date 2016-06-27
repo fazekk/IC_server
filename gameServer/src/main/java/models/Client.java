@@ -84,11 +84,13 @@ public class Client {
     public void setClientThread(ClientThread clientThread) {
         this.clientThread = clientThread;
     }
-
+/*
     public String toMessage() {
         return user.toMessage();
     }
-
+    {"@class" : "handlers.LoginRequest", "userName" : "szebi", "password" : "szebi"}
+    {"@class" : ".SubA", "a" : 5}
+*/
     public void addTeam(Team selectedTeam) {
         selectedTeams.add(selectedTeam);
     }

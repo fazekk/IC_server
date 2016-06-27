@@ -4,7 +4,6 @@ import com.j256.ormlite.dao.Dao;
 import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import constants.Constants;
-import constants.DefaultMessages;
 import models.Map;
 import models.SpawnPoint;
 import models.Client;
@@ -28,6 +27,7 @@ public class SpawnHandler {
     }
 
     public void sendSpawnPoints() throws Exception{
+        /*
         Dao<SpawnPoint, String> spawnPointDao = DaoManager.createDao(connectionSource, SpawnPoint.class);
 
         spawnPoints = spawnPointDao.queryBuilder().where().eq(Map.MAP_ID, map.getMapID()).query();
@@ -40,6 +40,6 @@ public class SpawnHandler {
                 user.getClientThread().send(DefaultMessages.GAME_MESSAGE + ";" + DefaultMessages.SPAWN_TEAM + ";" +tempSpawnPoint.toMessage());
             }
             i++;
-        }
+        }*/
     }
 }

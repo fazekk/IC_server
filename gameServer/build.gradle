@@ -8,8 +8,6 @@ repositories {
 }
 
 dependencies {
-    compile 'com.j256.ormlite:ormlite-core:4.35'
-    compile 'com.j256.ormlite:ormlite-jdbc:4.35'
     compile 'mysql:mysql-connector-java:5.1.38'
     compile 'com.sun.mail:javax.mail:1.5.5'
     compile 'org.xerial:sqlite-jdbc:3.7.2'

@@ -36,7 +36,7 @@ public class Log {
 
     public static void write(Exception ex){
         try {
-            write("EXCEPTION: "+ex.getMessage());
+            writeToAllOutput("EXCEPTION: "+ex.getMessage());
             writeToAllOutput("--------------------------------------");
             StackTraceElement[] stackTraceElements = ex.getStackTrace();
             for(StackTraceElement stackTraceElement : stackTraceElements){

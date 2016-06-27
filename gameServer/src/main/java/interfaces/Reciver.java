@@ -1,5 +1,7 @@
 package interfaces;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import com.j256.ormlite.support.ConnectionSource;
 import constants.Constants;
 import models.Client;
@@ -12,9 +14,11 @@ import java.net.DatagramPacket;
 /**
  * Created by sinemissione on 2016.06.24..
  */
+
 public class Reciver {
 
-    private ConnectionSource connectionSource;
+    @JsonIgnore
+    protected ConnectionSource connectionSource;
 
     public Reciver(ConnectionSource connectionSource){
         this.connectionSource = connectionSource;
