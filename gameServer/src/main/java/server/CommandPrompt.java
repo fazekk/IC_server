@@ -5,12 +5,14 @@ import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
 import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
 import constants.Commands;
+import constants.Constants;
 import constants.Properties;
 import helpers.Games;
 import logger.Log;
 import models.Character;
 import models.*;
 import thread.ServeThread;
+import thread.UDPServeThread;
 
 /**
  * Created by zipfs on 2016. 01. 11..
@@ -20,10 +22,12 @@ public class CommandPrompt {
 
     private ServeThread serveThread;
     private String confName;
+    private UDPServeThread udpServeThread;
 
-    public CommandPrompt(ServeThread serveThread, String confName) {
+    public CommandPrompt(ServeThread serveThread, UDPServeThread udpServeThread, String confName) {
         this.serveThread = serveThread;
         this.confName = confName;
+        this.udpServeThread = udpServeThread;
         System.out.println("Type the commands!");
     }
 
@@ -32,10 +36,7 @@ public class CommandPrompt {
      */
     public void commandReceived(String[] inputData) throws Exception{
         if(inputData[0].equals(Commands.START)){
-            startServer(ServerVariables.getValue(Properties.PROP_DATABASE_STRING)
-                    , Long.parseLong(ServerVariables.getValue(Properties.PROP_SERVE_SLEEP))
-                    , Long.parseLong(ServerVariables.getValue(Properties.PROP_CLIENT_SLEEP))
-                    , Integer.parseInt(ServerVariables.getValue(Properties.PROP_PORT)), serveThread);
+            startServer(serveThread,udpServeThread);
         }else if(inputData[0].equals(Commands.EXIT)){
             if(serveThread != null && serveThread.isRun()) {
                 stopServer(serveThread);
@@ -93,12 +94,11 @@ public class CommandPrompt {
     /*
     Start the server
      */
-    private void startServer(String databaseUrl
-            , long serveSleep, long clientSleep, int port, ServeThread serveThread) throws Exception{
+    private void startServer(ServeThread serveThread, UDPServeThread udpServeThread) throws Exception{
 
 
         ConnectionSource connectionSource =
-                new JdbcConnectionSource(databaseUrl);
+                new JdbcConnectionSource(ServerVariables.getValue(Properties.PROP_DATABASE_STRING));
         try {
             TableUtils.createTableIfNotExists(connectionSource, SystemUser.class);
             TableUtils.createTableIfNotExists(connectionSource, Team.class);
@@ -108,8 +108,17 @@ public class CommandPrompt {
             TableUtils.createTableIfNotExists(connectionSource, Map.class);
             TableUtils.createTableIfNotExists(connectionSource, Result.class);
 
-            serveThread.Init(port, connectionSource, serveSleep, clientSleep);
-            Games.init();
+            Router router = new Router(connectionSource);
+
+            serveThread.Init(Integer.parseInt(ServerVariables.getValue(Properties.PROP_PORT))
+                    ,connectionSource,router
+                    , Long.parseLong(ServerVariables.getValue(Properties.PROP_SERVE_SLEEP))
+                    ,Long.parseLong(ServerVariables.getValue(Properties.PROP_CLIENT_SLEEP)));
+
+            udpServeThread.Init(Integer.parseInt(ServerVariables.getValue(Properties.PROP_UDP_PORT)), router
+                    , Integer.parseInt(ServerVariables.getValue(Properties.PROP_UDP_PACKAGE_LENGTH))
+                    , Long.parseLong(ServerVariables.getValue(Properties.PROP_CLIENT_SLEEP)));
+
             serveThread.start();
             Log.write("Running");
         }catch (Exception e){

@@ -2,6 +2,7 @@ package models;
 
 import thread.ClientThread;
 
+import java.net.DatagramSocket;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -16,12 +17,19 @@ public class Client {
         this.selectedTeams = new ArrayList<>();
     }
 
+    public Client(SystemUser user){
+        this.user = user;
+    }
+
     public static final int STATUS_IN_GAME = 4;
     public static final int STATUS_WAIT_FOR_GAME = 5;
     public static final int STATUS_OFFLINE = 6;
     public static final int STATUS_REDY_FOR_GAME = 7;
 
     private List<Team> selectedTeams;
+
+
+    private DatagramSocket udpSocket;
 
     private String session;
 
@@ -83,5 +91,13 @@ public class Client {
 
     public void addTeam(Team selectedTeam) {
         selectedTeams.add(selectedTeam);
+    }
+
+    public DatagramSocket getUdpSocket() {
+        return udpSocket;
+    }
+
+    public void setUdpSocket(DatagramSocket udpSocket) {
+        this.udpSocket = udpSocket;
     }
 }

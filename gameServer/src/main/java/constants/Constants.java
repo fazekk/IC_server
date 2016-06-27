@@ -6,4 +6,6 @@ package constants;
 public class Constants {
 
     public static final int TEAM_OFFSET = 7;
+    public static final int UDP = 0;
+    public static final int TCP = 1;
 }

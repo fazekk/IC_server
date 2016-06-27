@@ -7,6 +7,7 @@ import logger.Log;
 import server.CommandPrompt;
 import server.ServerVariables;
 import thread.ServeThread;
+import thread.UDPServeThread;
 
 import java.io.BufferedReader;
 import java.io.InputStreamReader;
@@ -39,7 +40,8 @@ public class Main {
 
     public static void mainThread(){
         ServeThread serveThread = new ServeThread();
-        CommandPrompt commandPrompt = new CommandPrompt(serveThread, confName);
+        UDPServeThread udpServeThread = new UDPServeThread();
+        CommandPrompt commandPrompt = new CommandPrompt(serveThread,udpServeThread, confName);
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
 
         String input = "";

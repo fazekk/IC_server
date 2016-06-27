@@ -1,7 +1,11 @@
 package models;
 
+import com.google.gson.Gson;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
+import jdk.nashorn.internal.ir.debug.JSONWriter;
+import jdk.nashorn.internal.parser.JSONParser;
+import jdk.nashorn.internal.runtime.JSONFunctions;
 
 /**
  * Created by zipfs on 2015. 12. 24..
@@ -107,13 +111,7 @@ public class Character {
     }
 
     public String toMessage() {
-        return characterID +
-                ";" + name +
-                ";" + stamina +
-                ";" + intelligence +
-                ";" + armor +
-                ";" + magicResist +
-                ";" + strength +
-                ";" + spirit;
+        Gson gson = new Gson();
+        return gson.toJson(this);
     }
 }

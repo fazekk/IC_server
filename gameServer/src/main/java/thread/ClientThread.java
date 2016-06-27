@@ -1,6 +1,7 @@
 package thread;
 
 import com.j256.ormlite.support.ConnectionSource;
+import constants.Constants;
 import constants.DefaultMessages;
 import constants.Properties;
 import server.Router;
@@ -26,11 +27,13 @@ public class ClientThread extends Thread {
     private long lastUpdateTime;
     private int timeOutCount;
 
-    public ClientThread(Socket socket, ConnectionSource connectionSource, long sleepTime) {
+
+
+    public ClientThread(Socket socket,Router router, ConnectionSource connectionSource, long sleepTime) {
         this.socket = socket;
         this.run = true;
         this.sleepTime = sleepTime;
-        this.router = new Router(connectionSource,this);
+        this.router = router;
         try {
             this.inFromClient = new BufferedReader(new InputStreamReader(socket.getInputStream()));
         } catch (IOException e) {
@@ -80,7 +83,7 @@ public class ClientThread extends Thread {
                 timeOutCount = 0;
                 String clientSentence = inFromClient.readLine();
                 System.out.println("REC: "+ clientSentence);
-                router.onRecive(clientSentence.split(";"));
+                router.onRecive(clientSentence, this);
             }
         }
     }

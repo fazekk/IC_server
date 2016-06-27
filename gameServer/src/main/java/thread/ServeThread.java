@@ -3,8 +3,10 @@ package thread;
 import com.j256.ormlite.support.ConnectionSource;
 import helpers.Session;
 import logger.Log;
+import server.Router;
 
 import java.io.IOException;
+import java.net.DatagramSocket;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.ArrayList;
@@ -22,19 +24,21 @@ public class ServeThread extends Thread {
     private List<ClientThread> runningThreads;
     private long sleepTime;
     private long clientSleepTime;
+    private Router router;
 
     /*
     Initialize the serve thread
      */
-    public void Init(int port, ConnectionSource connectionSource,long sleepTime, long clientSleepTime){
+    public void Init(int tcpPort, ConnectionSource connectionSource, Router router, long sleepTime, long clientSleepTime){
         try {
             Session.Init();
             this.sleepTime = sleepTime;
             this.clientSleepTime = clientSleepTime;
-            this.runningThreads = new ArrayList<ClientThread>();
+            this.runningThreads = new ArrayList<>();
             this.connectionSource = connectionSource;
             this.run = true;
-            this.welcomeSocket = new ServerSocket(port);
+            this.welcomeSocket = new ServerSocket(tcpPort);
+            this.router = router;
         } catch (IOException e) {
             Log.write(e);
         }
@@ -49,7 +53,7 @@ public class ServeThread extends Thread {
                 checkClients();
                 if(welcomeSocket != null) {
                     Socket socket = welcomeSocket.accept();
-                    runningThreads.add(new ClientThread(socket, connectionSource, clientSleepTime));
+                    runningThreads.add(new ClientThread(socket,router, connectionSource, clientSleepTime));
                     runningThreads.get(runningThreads.size() - 1).start();
                     Log.write("Connection on server thread!" + socket.getInetAddress().getHostAddress());
                 }
