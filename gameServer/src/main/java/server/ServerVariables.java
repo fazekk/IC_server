@@ -136,4 +136,9 @@ public class ServerVariables {
         }
         return conf;
     }
+
+
+    public void LoadXML(){
+
+    }
 }

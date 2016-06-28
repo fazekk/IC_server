@@ -30,16 +30,6 @@ public class Router extends Reciver {
             requestHandler.setConnectionSource(connectionSource);
             requestHandler.setThread(thread);
             requestHandler.onRecive(message);
-            /*
-            if (type == DefaultMessages.LOGIN_UNAME_PASS) {
-                LoginRequest loginHandler = new LoginRequest(connectionSource);
-                loginHandler.onRecive(message, thread);
-            } else {
-                Client client = new Client();
-                client.setClientThread(thread);
-                send(DefaultMessages.BAD_REQUEST + "", Constants.TCP, client);
-            }*/
-
         }catch (Exception e){
             try {
                 Client client = new Client();
@@ -49,10 +39,5 @@ public class Router extends Reciver {
                 Log.write(e);
             }
         }
-    }
-
-    @Override
-    public void onRecive(String message, UDPServeThread thread) {
-
     }
 }
