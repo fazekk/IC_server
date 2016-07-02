@@ -1,6 +1,7 @@
 package server;
 
-import com.fasterxml.jackson.xml.XmlMapper;
+import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
+import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
@@ -105,7 +106,10 @@ public class CommandPrompt {
         try {
             TableUtils.createTableIfNotExists(connectionSource, SystemUser.class);
 
-            GameServerConfig config = new XmlMapper().readValue(new File("settings.xml"), GameServerConfig.class);
+            XmlMapper mapper = new XmlMapper();
+
+            GameServerConfig config = mapper.readValue(new File("settings.xml"), GameServerConfig.class);
+
 
 
             Router router = new Router(connectionSource);

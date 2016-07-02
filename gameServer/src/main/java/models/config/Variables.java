@@ -1,6 +1,7 @@
 package models.config;
 
-import com.fasterxml.jackson.xml.annotate.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import models.KeyValue;
 
 /**
@@ -8,6 +9,15 @@ import models.KeyValue;
  */
 public class Variables {
 
+    @JacksonXmlProperty(localName = "Variable")
+    @JacksonXmlElementWrapper(useWrapping = false)
     private KeyValue[] variables;
 
+    public KeyValue[] getVariables() {
+        return variables;
+    }
+
+    public void setVariables(KeyValue[] variables) {
+        this.variables = variables;
+    }
 }

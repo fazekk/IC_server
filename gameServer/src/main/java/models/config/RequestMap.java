@@ -1,7 +1,7 @@
 package models.config;
 
-import com.fasterxml.jackson.xml.annotate.JacksonXmlProperty;
-import com.fasterxml.jackson.xml.annotate.JacksonXmlRootElement;
+
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 /**
  * Created by zipfs on 2016. 06. 28..
@@ -9,9 +9,9 @@ import com.fasterxml.jackson.xml.annotate.JacksonXmlRootElement;
 
 public class RequestMap {
 
-    //@JacksonXmlProperty(localName = "From")
+    @JacksonXmlProperty(localName = "From")
     private String from;
-    //@JacksonXmlProperty(localName = "To")
+    @JacksonXmlProperty(localName = "To")
     private String to;
 
     public RequestMap() {

@@ -1,8 +1,7 @@
 package models.config;
 
-import com.fasterxml.jackson.xml.annotate.JacksonXmlElementWrapper;
-import com.fasterxml.jackson.xml.annotate.JacksonXmlProperty;
-import com.fasterxml.jackson.xml.annotate.JacksonXmlRootElement;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlElementWrapper;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 
 import java.util.List;
 
@@ -13,22 +12,7 @@ import java.util.List;
 public class MapperSettings {
 
 
-    @JacksonXmlElementWrapper
+    @JacksonXmlElementWrapper(useWrapping = false)
     @JacksonXmlProperty(localName = "RequestMap")
-    private RequestMap[] requestMaps;
-
-    public MapperSettings(RequestMap[] requestMaps) {
-        this.requestMaps = requestMaps;
-    }
-
-    public MapperSettings() {
-    }
-
-    public RequestMap[] getRequestMaps() {
-        return requestMaps;
-    }
-
-    public void setRequestMaps(RequestMap[] requestMaps) {
-        this.requestMaps = requestMaps;
-    }
+    private RequestMap[] requestMap;
 }

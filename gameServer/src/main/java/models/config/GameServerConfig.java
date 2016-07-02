@@ -1,6 +1,6 @@
 package models.config;
 
-import com.fasterxml.jackson.xml.annotate.JacksonXmlProperty;
+import com.fasterxml.jackson.dataformat.xml.annotation.JacksonXmlProperty;
 import com.sun.org.apache.xpath.internal.operations.Variable;
 
 import javax.xml.crypto.Data;
