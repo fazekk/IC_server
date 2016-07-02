@@ -13,10 +13,10 @@
         <UDPServeSleep>5</UDPServeSleep>
         <TCPClientSleep>5</TCPClientSleep>
         <UDPMaxPacketLength>2048</UDPMaxPacketLength>
-        <ServerPortsSettings>
+        <ServerPortSettings>
             <UDPPort>65111</UDPPort>
             <TCPPort>65112</TCPPort>
-        </ServerPortsSettings>
+        </ServerPortSettings>
     </ServerSettings>
 
     <MapperSettings>
@@ -30,4 +30,10 @@
         <Write>File</Write>
         <Write>Console</Write>
     </LoggerSettings>
+    <Variables>
+        <Variable>
+            <Key>Test</Key>
+            <Value>MyTest</Value>
+        </Variable>
+    </Variables>
 </GameServerConfig>

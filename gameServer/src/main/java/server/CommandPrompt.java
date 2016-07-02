@@ -1,5 +1,6 @@
 package server;
 
+import com.fasterxml.jackson.xml.XmlMapper;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
@@ -9,10 +10,12 @@ import constants.Constants;
 import constants.Properties;
 import helpers.Games;
 import logger.Log;
-import models.Character;
 import models.*;
+import models.config.GameServerConfig;
 import thread.ServeThread;
 import thread.UDPServeThread;
+
+import java.io.File;
 
 /**
  * Created by zipfs on 2016. 01. 11..
@@ -101,12 +104,9 @@ public class CommandPrompt {
                 new JdbcConnectionSource(ServerVariables.getValue(Properties.PROP_DATABASE_STRING));
         try {
             TableUtils.createTableIfNotExists(connectionSource, SystemUser.class);
-            TableUtils.createTableIfNotExists(connectionSource, Team.class);
-            TableUtils.createTableIfNotExists(connectionSource, Character.class);
-            TableUtils.createTableIfNotExists(connectionSource, UserHasTeam.class);
-            TableUtils.createTableIfNotExists(connectionSource, SpawnPoint.class);
-            TableUtils.createTableIfNotExists(connectionSource, Map.class);
-            TableUtils.createTableIfNotExists(connectionSource, Result.class);
+
+            GameServerConfig config = new XmlMapper().readValue(new File("settings.xml"), GameServerConfig.class);
+
 
             Router router = new Router(connectionSource);
 

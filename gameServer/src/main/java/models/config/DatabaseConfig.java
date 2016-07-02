@@ -6,10 +6,9 @@ import com.fasterxml.jackson.xml.annotate.JacksonXmlRootElement;
 /**
  * Created by zipfs on 2016. 06. 28..
  */
-@JacksonXmlRootElement(localName = "GameServerConfig")
 public class DatabaseConfig {
 
-    @JacksonXmlProperty(isAttribute = true)
+    @JacksonXmlProperty(localName = "DatabaseURL")
     private String databaseURL;
 
     public String getDatabaseURL() {

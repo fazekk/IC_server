@@ -13,8 +13,8 @@ public class Client {
     private SystemUser user;
     private ClientThread clientThread;
 
-    public Client() {
-        this.selectedTeams = new ArrayList<>();
+    public Client(){
+
     }
 
     public Client(SystemUser user){
@@ -26,8 +26,6 @@ public class Client {
     public static final int STATUS_OFFLINE = 6;
     public static final int STATUS_REDY_FOR_GAME = 7;
 
-    private List<Team> selectedTeams;
-
 
     private DatagramSocket udpSocket;
 
@@ -37,13 +35,6 @@ public class Client {
 
     private int status;
 
-    public List<Team> getSelectedTeams() {
-        return selectedTeams;
-    }
-
-    public void setSelectedTeams(List<Team> selectedTeams) {
-        this.selectedTeams = selectedTeams;
-    }
 
     public String getSession() {
         return session;
@@ -91,10 +82,6 @@ public class Client {
     {"@class" : "handlers.LoginRequest", "userName" : "szebi", "password" : "szebi"}
     {"@class" : ".SubA", "a" : 5}
 */
-    public void addTeam(Team selectedTeam) {
-        selectedTeams.add(selectedTeam);
-    }
-
     public DatagramSocket getUdpSocket() {
         return udpSocket;
     }
