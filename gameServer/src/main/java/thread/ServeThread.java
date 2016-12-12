@@ -34,7 +34,7 @@ public class ServeThread extends Thread {
             Session.Init();
             this.sleepTime = sleepTime;
             this.clientSleepTime = clientSleepTime;
-            this.runningThreads = new ArrayList<>();
+            this.runningThreads = new ArrayList<ClientThread>();
             this.connectionSource = connectionSource;
             this.run = true;
             this.welcomeSocket = new ServerSocket(tcpPort);

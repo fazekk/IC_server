@@ -23,7 +23,7 @@ public class SystemUser {
     public static final String USER_NAME = "name";
     public static final String USER_EMAIL = "email";
     public static final String USER_PASSWORD = "password";
-    public static final String USER_MONEY = "money";
+   // public static final String USER_MONEY = "money";
 
     @DatabaseField(columnName = USER_ID, generatedId = true)
     private int userID;
@@ -37,18 +37,18 @@ public class SystemUser {
     @DatabaseField(columnName = USER_PASSWORD)
     private String password;
 
-    @DatabaseField(columnName = USER_MONEY)
-    private int money;
+   /* @DatabaseField(columnName = USER_MONEY)
+    private int money;*/
 
     public SystemUser() {
 
     }
 
-    public SystemUser(String email, String name, String password, int money) {
+    public SystemUser(String email, String name, String password) {
         this.email = email;
         this.name = name;
         this.password = password;
-        this.money = money;
+       // this.money = money;
     }
 
     public String toMessage() throws JsonProcessingException {
@@ -87,13 +87,13 @@ public class SystemUser {
         this.password = password;
     }
 
-    public int getMoney() {
+   /* public int getMoney() {
         return money;
     }
 
     public void setMoney(int money) {
         this.money = money;
-    }
+    }*/
 
 
     public static SystemUser fromJson(String data) throws IOException {

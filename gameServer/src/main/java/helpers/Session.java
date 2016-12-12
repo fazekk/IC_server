@@ -19,7 +19,7 @@ public class Session {
 
     public static void Init(){
         users = Collections.synchronizedMap(new LinkedHashMap());
-        sessions = new ArrayList<>();
+        sessions = new ArrayList<String>();
     }
 
     public static String generateSession(){
@@ -47,6 +47,11 @@ public class Session {
      * @return
      */
     public static String addUser(Client user){
+        for(Client client : users.values()){
+            if(client.getUser().getEmail().equals(user.getUser().getEmail())){
+                client.getClientThread().shutDown();
+            }
+        }
         String session = generateSession();
         users.put(session,user);
         return session;

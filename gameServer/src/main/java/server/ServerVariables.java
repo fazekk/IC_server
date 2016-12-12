@@ -18,9 +18,9 @@ public class ServerVariables {
     private static String configPath;
 
     public static final String KEY_NOT_EXIST = "NONE";
-    private static List<KeyValue> comments = new ArrayList<>();
+    private static List<KeyValue> comments = new ArrayList<KeyValue>();
 
-    private static List<KeyValue> properties = new ArrayList<>();
+    private static List<KeyValue> properties = new ArrayList<KeyValue>();
 
     /*
     Set a properti to server

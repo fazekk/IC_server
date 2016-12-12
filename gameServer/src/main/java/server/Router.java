@@ -4,6 +4,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import com.j256.ormlite.support.ConnectionSource;
 import constants.Constants;
 import handlers.LoginRequest;
+import helpers.Session;
 import interfaces.RequestHandler;
 import interfaces.Reciver;
 import logger.Log;
@@ -27,6 +28,9 @@ public class Router extends Reciver {
 
         try {
             RequestHandler requestHandler = new ObjectMapper().readValue(message, RequestHandler.class);
+            if(requestHandler.getSession()!= null && requestHandler.getSession() != ""){
+                Session.getUserWithSession(requestHandler.getSession()).setClientThread(thread);
+            }
             requestHandler.setConnectionSource(connectionSource);
             requestHandler.setThread(thread);
             requestHandler.onRecive(message);

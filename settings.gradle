@@ -7,3 +7,5 @@ include 'webServer'
 include 'sharedModels'
 include 'fighter_server'
 
+include 'ic_server'
+

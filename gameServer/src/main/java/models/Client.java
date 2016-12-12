@@ -1,3 +1,4 @@
+
 package models;
 
 import thread.ClientThread;
@@ -12,6 +13,7 @@ import java.util.List;
 public class Client {
     private SystemUser user;
     private ClientThread clientThread;
+    private int gameID;
 
     public Client(){
 
@@ -75,18 +77,31 @@ public class Client {
     public void setClientThread(ClientThread clientThread) {
         this.clientThread = clientThread;
     }
-/*
-    public String toMessage() {
-        return user.toMessage();
-    }
-    {"@class" : "handlers.LoginRequest", "userName" : "szebi", "password" : "szebi"}
-    {"@class" : ".SubA", "a" : 5}
-*/
+    /*
+        public String toMessage() {
+            return user.toMessage();
+        }
+        {"@class" : "handlers.LoginRequest", "userName" : "szebi", "password" : "szebi"}
+        {"@class" : ".SubA", "a" : 5}
+    */
     public DatagramSocket getUdpSocket() {
         return udpSocket;
     }
 
     public void setUdpSocket(DatagramSocket udpSocket) {
         this.udpSocket = udpSocket;
+    }
+
+    public int getGameID() {
+        return gameID;
+    }
+
+    public void setGameID(int gameID) {
+        this.gameID = gameID;
+    }
+
+    public boolean isOnline(){
+        return this.clientThread.isOnline();
+
     }
 }

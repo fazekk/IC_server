@@ -2,11 +2,21 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
-      <module fileurl="file://$PROJECT_DIR$/easy_networking_kit.iml" filepath="$PROJECT_DIR$/easy_networking_kit.iml" />
-      <module fileurl="file://$PROJECT_DIR$/fighter_server/fighter_server.iml" filepath="$PROJECT_DIR$/fighter_server/fighter_server.iml" />
-      <module fileurl="file://$PROJECT_DIR$/gameServer/gameServer.iml" filepath="$PROJECT_DIR$/gameServer/gameServer.iml" />
-      <module fileurl="file://$PROJECT_DIR$/sharedModels/sharedModels.iml" filepath="$PROJECT_DIR$/sharedModels/sharedModels.iml" />
-      <module fileurl="file://$PROJECT_DIR$/webServer/webServer.iml" filepath="$PROJECT_DIR$/webServer/webServer.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/easy_networking_kit.iml" filepath="$PROJECT_DIR$/.idea/modules/easy_networking_kit.iml" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/easy_networking_kit_main.iml" filepath="$PROJECT_DIR$/.idea/modules/easy_networking_kit_main.iml" group="easy_networking_kit" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/easy_networking_kit_test.iml" filepath="$PROJECT_DIR$/.idea/modules/easy_networking_kit_test.iml" group="easy_networking_kit" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gameServer/gameServer.iml" filepath="$PROJECT_DIR$/.idea/modules/gameServer/gameServer.iml" group="gameServer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gameServer/gameServer_main.iml" filepath="$PROJECT_DIR$/.idea/modules/gameServer/gameServer_main.iml" group="gameServer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/gameServer/gameServer_test.iml" filepath="$PROJECT_DIR$/.idea/modules/gameServer/gameServer_test.iml" group="gameServer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ic_server/ic_server.iml" filepath="$PROJECT_DIR$/.idea/modules/ic_server/ic_server.iml" group="ic_server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ic_server/ic_server_main.iml" filepath="$PROJECT_DIR$/.idea/modules/ic_server/ic_server_main.iml" group="ic_server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/ic_server/ic_server_test.iml" filepath="$PROJECT_DIR$/.idea/modules/ic_server/ic_server_test.iml" group="ic_server" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sharedModels/sharedModels.iml" filepath="$PROJECT_DIR$/.idea/modules/sharedModels/sharedModels.iml" group="sharedModels" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sharedModels/sharedModels_main.iml" filepath="$PROJECT_DIR$/.idea/modules/sharedModels/sharedModels_main.iml" group="sharedModels" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/sharedModels/sharedModels_test.iml" filepath="$PROJECT_DIR$/.idea/modules/sharedModels/sharedModels_test.iml" group="sharedModels" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webServer/webServer.iml" filepath="$PROJECT_DIR$/.idea/modules/webServer/webServer.iml" group="webServer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webServer/webServer_main.iml" filepath="$PROJECT_DIR$/.idea/modules/webServer/webServer_main.iml" group="webServer" />
+      <module fileurl="file://$PROJECT_DIR$/.idea/modules/webServer/webServer_test.iml" filepath="$PROJECT_DIR$/.idea/modules/webServer/webServer_test.iml" group="webServer" />
     </modules>
   </component>
 </project>

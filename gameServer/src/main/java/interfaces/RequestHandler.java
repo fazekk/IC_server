@@ -19,7 +19,7 @@ import java.net.DatagramSocket;
 @JsonTypeInfo(
         use = JsonTypeInfo.Id.MINIMAL_CLASS,
         include = JsonTypeInfo.As.PROPERTY,
-        property = "@class")
+        property = "type")
 public class RequestHandler{
 
     @JsonIgnore
@@ -28,6 +28,7 @@ public class RequestHandler{
     protected ClientThread thread;
 
     protected String type;
+    protected  String session;
 
     public void onRecive(String request){
 
@@ -69,4 +70,9 @@ public class RequestHandler{
     public void setType(String type) {
         this.type = type;
     }
+
+    public String getSession() {
+        return session;
+    }
+
 }

@@ -1,17 +1,14 @@
 package server;
 
-import com.fasterxml.jackson.dataformat.xml.JacksonXmlModule;
 import com.fasterxml.jackson.dataformat.xml.XmlMapper;
 import com.j256.ormlite.jdbc.JdbcConnectionSource;
+import com.j256.ormlite.spring.TableCreator;
 import com.j256.ormlite.support.ConnectionSource;
 import com.j256.ormlite.table.TableUtils;
-import com.mysql.jdbc.exceptions.MySQLSyntaxErrorException;
 import constants.Commands;
-import constants.Constants;
 import constants.Properties;
-import helpers.Games;
 import logger.Log;
-import models.*;
+import models.SystemUser;
 import models.config.GameServerConfig;
 import thread.ServeThread;
 import thread.UDPServeThread;

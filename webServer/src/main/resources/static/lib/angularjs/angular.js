@@ -9795,7 +9795,7 @@ function $HttpProvider() {
      * $http(req).then(function(){...}, function(){...});
      * ```
      *
-     * ## Transforming Requests and Responses
+     * ## Transforming Requests and responses
      *
      * Both requests and responses can be transformed using transformation functions: `transformRequest`
      * and `transformResponse`. These properties can be a single function that returns
@@ -10403,7 +10403,7 @@ function $HttpProvider() {
          * Runtime equivalent of the `$httpProvider.defaults` property. Allows configuration of
          * default headers, withCredentials as well as request and response transformations.
          *
-         * See "Setting HTTP Headers" and "Transforming Requests and Responses" sections above.
+         * See "Setting HTTP Headers" and "Transforming Requests and responses" sections above.
          */
     $http.defaults = defaults;
 
