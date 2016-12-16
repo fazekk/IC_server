@@ -29,16 +29,6 @@ public class Game extends Thread {
     private boolean run;
     private int clientLoaded = 0;
 
-   /*public void init (List<Client> currentUsers, int gameID) {
-        inGameClients = currentUsers; //�thelyezz�k a currentusersb�l a playereket
-        this.gameID = gameID; //�tadjuk a gameID-t
-        for(Client client : currentUsers)
-        {
-            client.setGameID(gameID); //be�ll�tjuk az adott usernek a gameid-j�t
-        }
-
-        run = true;
-    }*/
    public void init (List<Client> currentUsers, int gameID, ConnectionSource connectionSource) {
        try{
            //
@@ -133,7 +123,7 @@ public class Game extends Thread {
                         if(enemyPlayer != player){
                             Enemy enemy = new Enemy();
                             //
-                            // Enemy beállítása az Eemy class alapján
+                            // Enemy beállítása az Enemy class alapján
                             //
                             enemy.setId(enemyPlayer.getId());
                             enemy.setPositionEnemy(enemyPlayer.getPosition());
@@ -170,7 +160,9 @@ public class Game extends Thread {
             Log.write(e);
         }
     }
-    public void moveRequest(Client client, Vector3 newPosition, Long timeStamp){
+    public void moveRequest(Client client, Vector3 newPosition, Long timeStamp, float rotation,
+                            boolean forward, boolean left, boolean right, boolean backward,
+                            boolean lshift, boolean space, boolean lctrl){
 
         Player sender = null;
         for(Player player : inGameClients){
@@ -178,6 +170,14 @@ public class Game extends Thread {
                 sender = player;
                 player.setPosition(newPosition);
                 player.setTimeStamp(timeStamp);
+                player.setRotation(rotation);
+                player.setForward(forward);
+                player.setLeft(left);
+                player.setRight(right);
+                player.setBackward(backward);
+                player.setLshift(lshift);
+                player.setSpace(space);
+                player.setLctrl(lctrl);
                 break;
             }
 
@@ -190,6 +190,14 @@ public class Game extends Thread {
                     moveResponse.setId(sender.getId());
                     moveResponse.setNewPosition(sender.getPosition());
                     moveResponse.setTimeStamp(sender.getTimeStamp());
+                    moveResponse.setRotation(sender.getRotation());
+                    moveResponse.setForward(sender.isForward());
+                    moveResponse.setLeft(sender.isLeft());
+                    moveResponse.setRight(sender.isRight());
+                    moveResponse.setBackward(sender.isBackward());
+                    moveResponse.setLshift(sender.isLshift());
+                    moveResponse.setSpace(sender.isSpace());
+                    moveResponse.setLctrl(sender.isLctrl());
                     enemy.getClient().getClientThread().send(new ObjectMapper().writeValueAsString(moveResponse));
                 } catch (Exception e) {
                     Log.write(e);
@@ -213,7 +221,7 @@ public class Game extends Thread {
         }*/
     }
 
-    private void sendPositions() {
+    /*private void sendPositions() {
         try {
             for (Player player : inGameClients) {
                 for (Player enemy : inGameClients) {
@@ -244,7 +252,7 @@ public class Game extends Thread {
                 }
             }
         }
-    }
+    }*/
 
 
     @Override
