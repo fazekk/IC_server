@@ -1,13 +1,14 @@
 package responses;
 
+import models.Response;
+
 /**
  * Created by Kesze on 2016.08.27..
  */
-public class SearchResponse {
+public class SearchResponse extends Response{
     private boolean success;
     private String message;
     private boolean matchFind;
-    private String type;
 
     public boolean isMatchFind() {
         return matchFind;
@@ -31,14 +32,6 @@ public class SearchResponse {
 
     public void setMessage(String message) {
         this.message = message;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 
 }

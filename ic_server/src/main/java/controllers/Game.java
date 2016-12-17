@@ -6,6 +6,7 @@ import com.j256.ormlite.dao.DaoManager;
 import com.j256.ormlite.support.ConnectionSource;
 import constants.CommunicationConstants;
 import handlers.MoveRequest;
+import handlers.ShootRequest;
 import logger.Log;
 import models.*;
 import responses.*;
@@ -151,7 +152,7 @@ public class Game extends Thread {
                 run = true;
                 this.start();
             } else {
-                InitResponse response = new InitResponse();
+                Response response = new Response();
                 response.setType(CommunicationConstants.INIT_RESPONSE);
                 //response.setSuccess(true);
                 client.getClientThread().send(new ObjectMapper().writeValueAsString(response));
@@ -160,99 +161,83 @@ public class Game extends Thread {
             Log.write(e);
         }
     }
-    public void moveRequest(Client client, Vector3 newPosition, Long timeStamp, float rotation,
-                            boolean forward, boolean left, boolean right, boolean backward,
-                            boolean lshift, boolean space, boolean lctrl){
+    public void moveRequest(Client client, MoveRequest request){
 
-        Player sender = null;
         for(Player player : inGameClients){
             if(player.getClient() == client){
-                sender = player;
-                player.setPosition(newPosition);
-                player.setTimeStamp(timeStamp);
-                player.setRotation(rotation);
-                player.setForward(forward);
-                player.setLeft(left);
-                player.setRight(right);
-                player.setBackward(backward);
-                player.setLshift(lshift);
-                player.setSpace(space);
-                player.setLctrl(lctrl);
+                player.setPosition(request.getNewPosition());
+                player.setTimeStamp(request.getTimeStamp());
+                player.setRotation(request.getRotation());
+                player.setHorizontal(request.getHorizontal());
+                player.setVertical(request.getVertical());
+                player.setLshift(request.isLshift());
+                player.setSpace(request.isSpace());
+                player.setLctrl(request.isLctrl());
                 break;
             }
 
         }
-        for(Player enemy : inGameClients){
-            if(enemy != sender) {
-                try {
-                    MoveResponse moveResponse = new MoveResponse();
-                    moveResponse.setType(CommunicationConstants.MOVE_RESPONSE);
-                    moveResponse.setId(sender.getId());
-                    moveResponse.setNewPosition(sender.getPosition());
-                    moveResponse.setTimeStamp(sender.getTimeStamp());
-                    moveResponse.setRotation(sender.getRotation());
-                    moveResponse.setForward(sender.isForward());
-                    moveResponse.setLeft(sender.isLeft());
-                    moveResponse.setRight(sender.isRight());
-                    moveResponse.setBackward(sender.isBackward());
-                    moveResponse.setLshift(sender.isLshift());
-                    moveResponse.setSpace(sender.isSpace());
-                    moveResponse.setLctrl(sender.isLctrl());
-                    enemy.getClient().getClientThread().send(new ObjectMapper().writeValueAsString(moveResponse));
-                } catch (Exception e) {
-                    Log.write(e);
+
+    }
+
+    public Player getPlayerWithID(int id) {
+        for(Player player : inGameClients) {
+            if(player.getId() == id) {
+                return player;
+            }
+        }
+        Log.write("Player not found");
+        return null;
+    }
+    public void shootRequest(ShootRequest req, Client client) {
+
+        Player shootedPlayer = getPlayerWithID(req.getWoundedID());
+        int newhp = shootedPlayer.getHp() - req.getDmg();
+        if(newhp <= 0) {
+            for(Player player : inGameClients) {
+                if(client == player.getClient()) {
+                    player.setKill(player.getKill()+1);
                 }
             }
+            shootedPlayer.setDeath(shootedPlayer.getDeath()+1);
         }
-    }
+        shootedPlayer.setHp(newhp);
 
-    public void shootRequest(Client client, int newhp, int dmg) {
-        for(Player player : inGameClients) {
-            if(player.getClient() != client){
-                int currenthp = player.getHp() - dmg;
-                player.setHp(currenthp);
-                break;
-            }
-        }
-        /*for(Player player : inGameClients) {
-            if (player.getClient() != client) {
-                client.getClientThread().send(new ObjectMapper().writeValueAsString(player));
-            }
-        }*/
-    }
-
-    /*private void sendPositions() {
         try {
-            for (Player player : inGameClients) {
-                for (Player enemy : inGameClients) {
-                    if (player != enemy && player.getClient().isOnline()) {
+            ShootResponse shootResponse = new ShootResponse();
+            shootResponse.setNewhp(newhp);
+            shootResponse.setType(CommunicationConstants.SHOOT_RESPONSE);
+            shootedPlayer.getClient().getClientThread().send(new ObjectMapper().writeValueAsString(shootResponse));
+        } catch (Exception e)  {
+            Log.write(e);
+        }
+    }
+
+    private void sendPositions() {
+        for(int i = 0; i<inGameClients.size(); i++) {
+            for (int j=0; j<inGameClients.size(); j++) {
+                if (inGameClients.get(i) != inGameClients.get(j)) {
+                    try {
                         MoveResponse moveResponse = new MoveResponse();
                         moveResponse.setType(CommunicationConstants.MOVE_RESPONSE);
-                        moveResponse.setId(enemy.getId());
-                        moveResponse.setNewPosition(enemy.getPosition());
-                        player.getClient().getClientThread().send(new ObjectMapper().writeValueAsString(moveResponse));
+                        moveResponse.setId(inGameClients.get(j).getId());
+                        moveResponse.setNewPosition(inGameClients.get(j).getPosition());
+                        moveResponse.setTimeStamp(inGameClients.get(j).getTimeStamp());
+                        moveResponse.setRotation(inGameClients.get(j).getRotation());
+                        moveResponse.setVertical(inGameClients.get(j).getVertical());
+                        moveResponse.setHorizontal(inGameClients.get(j).getHorizontal());
+                        moveResponse.setLshift(inGameClients.get(j).isLshift());
+                        moveResponse.setSpace(inGameClients.get(j).isSpace());
+                        moveResponse.setLctrl(inGameClients.get(j).isLctrl());
+                        inGameClients.get(i).getClient().getClientThread().send(new ObjectMapper().writeValueAsString(moveResponse));
+                    } catch (Exception e) {
+                        Log.write(e);
+                        //inGameClients.remove(i);
                     }
-                }
-            }
-        }catch(Exception e){
-            run =  false;
-            GameManagger.gameEnded(this.gameID);
-            for (Player player : inGameClients) {
-                player.getClient().setGameID(0);
-                EndGameResponse endResponse = new EndGameResponse();
-                endResponse.setType(CommunicationConstants.END_GAME_RESPONSE);
-                //endResponse.setTime(0);
-                endResponse.setVictory(false);
-                try {
-                    if(player.getClient().isOnline()) {
-                        player.getClient().getClientThread().send(new ObjectMapper().writeValueAsString(endResponse));
-                    }
-                }catch (Exception ex){
-                    Log.write(ex);
                 }
             }
         }
-    }*/
+    }
 
 
     @Override
@@ -261,7 +246,8 @@ public class Game extends Thread {
         while(run)
         {
             try {
-                sleep(10);
+                sendPositions();
+                sleep(100);
             } catch (InterruptedException e) {
                 Log.write(e);
             }

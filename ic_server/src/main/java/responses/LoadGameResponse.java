@@ -9,7 +9,6 @@ import models.Response;
 public class LoadGameResponse extends Response {
 
     private int mapID;
-    private String type;
 
     public int getMapID() {
         return mapID;
@@ -17,13 +16,5 @@ public class LoadGameResponse extends Response {
 
     public void setMapID(int mapID) {
         this.mapID = mapID;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }

@@ -74,7 +74,7 @@ public class ClientThread extends Thread {
                 lastUpdateTime = System.currentTimeMillis();
                 String clientSentence = inFromClient.readLine();
                 if(!clientSentence.contains("PingRequest")) {
-                    System.out.println("REC: " + clientSentence);
+                    //System.out.println("REC: " + clientSentence);
                 }
                 router.onRecive(clientSentence, this);
             }
@@ -84,7 +84,7 @@ public class ClientThread extends Thread {
     public void send(String data) throws IOException {
         byte[] first = (data + System.getProperty("line.separator")).getBytes(Charset.forName("UTF-8"));
         socket.getOutputStream().write(first);
-        System.out.println("SEN: "+data);
+        //System.out.println("SEN: "+data);
     }
 
     public void shutDown() {

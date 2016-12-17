@@ -15,10 +15,8 @@ public class MoveRequest extends RequestHandler {
     private Long timeStamp;
     private Vector3 newPosition;
     private float rotation;
-    private boolean forward;
-    private boolean left;
-    private boolean right;
-    private boolean backward;
+    private float horizontal;
+    private float vertical;
     private boolean lshift;
     private boolean space;
     private boolean lctrl;
@@ -28,8 +26,7 @@ public class MoveRequest extends RequestHandler {
         super.onRecive(request);
         Client client = Session.getUserWithSession(session); //sessionnel ell?tott cliensek
         Game game = GameManagger.getGame(client.getGameID()); //game lek?r?s
-        game.moveRequest(client, newPosition, timeStamp, rotation,
-                forward, left, right, backward, lshift, space, lctrl);
+        game.moveRequest(client, this);
     }
 
     public Long getTimeStamp() {
@@ -56,36 +53,20 @@ public class MoveRequest extends RequestHandler {
         this.rotation = rotation;
     }
 
-    public boolean isForward() {
-        return forward;
+    public float getHorizontal() {
+        return horizontal;
     }
 
-    public void setForward(boolean forward) {
-        this.forward = forward;
+    public void setHorizontal(float horizontal) {
+        this.horizontal = horizontal;
     }
 
-    public boolean isLeft() {
-        return left;
+    public float getVertical() {
+        return vertical;
     }
 
-    public void setLeft(boolean left) {
-        this.left = left;
-    }
-
-    public boolean isRight() {
-        return right;
-    }
-
-    public void setRight(boolean right) {
-        this.right = right;
-    }
-
-    public boolean isBackward() {
-        return backward;
-    }
-
-    public void setBackward(boolean backward) {
-        this.backward = backward;
+    public void setVertical(float vertical) {
+        this.vertical = vertical;
     }
 
     public boolean isLshift() {

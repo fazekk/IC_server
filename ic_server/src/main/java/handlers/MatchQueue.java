@@ -16,9 +16,9 @@ public class MatchQueue {
         waitingPlayer.add(client);
     }
     public static List<Client> getPlayers(int num) {
-        List<Client> clients = new ArrayList<Client>(); //num az egy helyfoglaló máshol kap értéket
+        List<Client> clients = new ArrayList<Client>(); //num az egy helyfoglalï¿½ mï¿½shol kap ï¿½rtï¿½ket
         if (num <= waitingPlayer.size()) {
-            for (int i = 0; i < waitingPlayer.size()+1; i++) {
+            for (int i = 0; i < num; i++) {
                 clients.add(waitingPlayer.poll());
             }
             return clients;

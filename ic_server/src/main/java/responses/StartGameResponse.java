@@ -12,7 +12,6 @@ import java.util.List;
 public class StartGameResponse extends Response {
     private List<Enemy> enemyList;
     private Vector3 position;
-    private String type;
 
     public List<Enemy> getEnemyList() {
         return enemyList;
@@ -28,13 +27,5 @@ public class StartGameResponse extends Response {
 
     public void setPosition(Vector3 position) {
         this.position = position;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }

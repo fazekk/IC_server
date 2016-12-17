@@ -9,11 +9,13 @@ public class Player {
     private SpawnPoint spawnPoint;
     private Vector3 position;
     private Long timeStamp;
+
+    private int kill;
+    private int death;
+
     private float rotation;
-    private boolean forward;
-    private boolean left;
-    private boolean right;
-    private boolean backward;
+    private float vertical;
+    private float horizontal;
     private boolean lshift;
     private boolean space;
     private boolean lctrl;
@@ -62,6 +64,38 @@ public class Player {
         this.timeStamp = timeStamp;
     }
 
+    public int getKill() {
+        return kill;
+    }
+
+    public void setKill(int kill) {
+        this.kill = kill;
+    }
+
+    public int getDeath() {
+        return death;
+    }
+
+    public float getVertical() {
+        return vertical;
+    }
+
+    public void setVertical(float vertical) {
+        this.vertical = vertical;
+    }
+
+    public float getHorizontal() {
+        return horizontal;
+    }
+
+    public void setHorizontal(float horizontal) {
+        this.horizontal = horizontal;
+    }
+
+    public void setDeath(int death) {
+        this.death = death;
+    }
+
     public int getHp() {
         return hp;
     }
@@ -76,38 +110,6 @@ public class Player {
 
     public void setRotation(float rotation) {
         this.rotation = rotation;
-    }
-
-    public boolean isForward() {
-        return forward;
-    }
-
-    public void setForward(boolean forward) {
-        this.forward = forward;
-    }
-
-    public boolean isLeft() {
-        return left;
-    }
-
-    public void setLeft(boolean left) {
-        this.left = left;
-    }
-
-    public boolean isRight() {
-        return right;
-    }
-
-    public void setRight(boolean right) {
-        this.right = right;
-    }
-
-    public boolean isBackward() {
-        return backward;
-    }
-
-    public void setBackward(boolean backward) {
-        this.backward = backward;
     }
 
     public boolean isLshift() {

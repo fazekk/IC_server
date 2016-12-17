@@ -9,7 +9,6 @@ public class EndGameResponse extends Response {
 
     private boolean victory;
     //private int time;
-    private String type;
 
     public boolean isVictory() {
         return victory;
@@ -26,12 +25,4 @@ public class EndGameResponse extends Response {
     public void setTime(int time) {
         this.time = time;
     }*/
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
 }

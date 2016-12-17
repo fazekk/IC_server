@@ -12,11 +12,8 @@ public class MoveResponse extends Response {
     private Vector3 newPosition;
     private float rotation;
     private Long timeStamp;
-    private String type;
-    private boolean forward;
-    private boolean left;
-    private boolean right;
-    private boolean backward;
+    private float horizontal;
+    private float vertical;
     private boolean lshift;
     private boolean space;
     private boolean lctrl;
@@ -24,6 +21,7 @@ public class MoveResponse extends Response {
     public int getId() {
         return id;
     }
+
 
     public void setId(int id) {
         this.id = id;
@@ -45,14 +43,6 @@ public class MoveResponse extends Response {
         this.rotation = rotation;
     }
 
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
-    }
-
     public Long getTimeStamp() {
         return timeStamp;
     }
@@ -61,36 +51,20 @@ public class MoveResponse extends Response {
         this.timeStamp = timeStamp;
     }
 
-    public boolean isForward() {
-        return forward;
+    public float getHorizontal() {
+        return horizontal;
     }
 
-    public void setForward(boolean forward) {
-        this.forward = forward;
+    public void setHorizontal(float horizontal) {
+        this.horizontal = horizontal;
     }
 
-    public boolean isLeft() {
-        return left;
+    public float getVertical() {
+        return vertical;
     }
 
-    public void setLeft(boolean left) {
-        this.left = left;
-    }
-
-    public boolean isRight() {
-        return right;
-    }
-
-    public void setRight(boolean right) {
-        this.right = right;
-    }
-
-    public boolean isBackward() {
-        return backward;
-    }
-
-    public void setBackward(boolean backward) {
-        this.backward = backward;
+    public void setVertical(float vertical) {
+        this.vertical = vertical;
     }
 
     public boolean isLshift() {

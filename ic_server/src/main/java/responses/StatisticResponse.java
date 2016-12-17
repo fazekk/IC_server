@@ -10,7 +10,6 @@ public class StatisticResponse extends Response {
     private String name;
     private Integer kill;
     private Integer death;
-    private String type;
 
     public String getName() {
         return name;
@@ -34,13 +33,5 @@ public class StatisticResponse extends Response {
 
     public void setDeath(Integer death) {
         this.death = death;
-    }
-
-    public String getType() {
-        return type;
-    }
-
-    public void setType(String type) {
-        this.type = type;
     }
 }
