@@ -22,6 +22,8 @@ public class Player {
 
     private int hp;
 
+    private boolean dead = false;
+
     private int id;
 
     public int getId() {
@@ -134,5 +136,13 @@ public class Player {
 
     public void setLctrl(boolean lctrl) {
         this.lctrl = lctrl;
+    }
+
+    public boolean isDead() {
+        return dead;
+    }
+
+    public void setDead(boolean dead) {
+        this.dead = dead;
     }
 }

@@ -194,7 +194,9 @@ public class Game extends Thread {
 
         Player shootedPlayer = getPlayerWithID(req.getWoundedID());
         int newhp = shootedPlayer.getHp() - req.getDmg();
-        if(newhp <= 0) {
+        if(newhp <= 0 && !shootedPlayer.isDead()) {
+            newhp = 0;
+            shootedPlayer.setDead(true);
             for(Player player : inGameClients) {
                 if(client == player.getClient()) {
                     player.setKill(player.getKill()+1);
