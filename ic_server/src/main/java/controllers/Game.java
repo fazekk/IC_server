@@ -147,9 +147,9 @@ public class Game extends Thread {
                     // Elküldjük a player kezdő pozícióját és az enemy helyzetét
                     //
                     player.getClient().getClientThread().send(new ObjectMapper().writeValueAsString(response));
-
                 }
                 run = true;
+                clientLoaded=0;
                 this.start();
             } else {
                 Response response = new Response();
@@ -189,6 +189,7 @@ public class Game extends Thread {
         Log.write("Player not found");
         return null;
     }
+
     public void shootRequest(ShootRequest req, Client client) {
 
         Player shootedPlayer = getPlayerWithID(req.getWoundedID());
@@ -202,6 +203,7 @@ public class Game extends Thread {
             shootedPlayer.setDeath(shootedPlayer.getDeath()+1);
         }
         shootedPlayer.setHp(newhp);
+        Log.write("" + newhp);
 
         try {
             ShootResponse shootResponse = new ShootResponse();
@@ -247,7 +249,7 @@ public class Game extends Thread {
         {
             try {
                 sendPositions();
-                sleep(100);
+                sleep(30);
             } catch (InterruptedException e) {
                 Log.write(e);
             }
