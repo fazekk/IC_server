@@ -194,9 +194,11 @@ public class Game extends Thread {
 
         Player shootedPlayer = getPlayerWithID(req.getWoundedID());
         int newhp = shootedPlayer.getHp() - req.getDmg();
-        if(newhp <= 0 && !shootedPlayer.isDead()) {
+        if(newhp <= 0) {
             newhp = 0;
-            shootedPlayer.setDead(true);
+            if(shootedPlayer.isDead() == false) {
+                shootedPlayer.setDead(true);
+            }
             for(Player player : inGameClients) {
                 if(client == player.getClient()) {
                     player.setKill(player.getKill()+1);
@@ -210,6 +212,7 @@ public class Game extends Thread {
         try {
             ShootResponse shootResponse = new ShootResponse();
             shootResponse.setNewhp(newhp);
+            shootResponse.setWoundedID(shootedPlayer.getId());
             shootResponse.setType(CommunicationConstants.SHOOT_RESPONSE);
             shootedPlayer.getClient().getClientThread().send(new ObjectMapper().writeValueAsString(shootResponse));
         } catch (Exception e)  {
