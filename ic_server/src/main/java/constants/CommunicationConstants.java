@@ -13,4 +13,5 @@ public class CommunicationConstants {
     public static final String END_GAME_RESPONSE = "EndGameResponse";
     public static final String STATISTIC_RESPONSE = "StatisticResponse";
     public static final String SHOOT_RESPONSE = "ShootResponse";
+    public static final String DEAD_RESPONSE = "DeadResponse";
 }

@@ -8,7 +8,7 @@ import models.Response;
 public class ShootResponse extends Response{
 
     private int newhp;
-    private int woundedID;
+    //private int woundedID;
 
     public int getNewhp() {
         return newhp;
@@ -18,11 +18,11 @@ public class ShootResponse extends Response{
         this.newhp = newhp;
     }
 
-    public int getWoundedID() {
+    /*public int getWoundedID() {
         return woundedID;
     }
 
     public void setWoundedID(int woundedID) {
         this.woundedID = woundedID;
-    }
+    }*/
 }
